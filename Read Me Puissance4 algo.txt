@@ -1,0 +1,40 @@
+﻿DESCRIPTION DE L’IMPLEMENTATION TECHNIQUE DU JEU
+
+
+* Création d’une Main qui va chaîner les étapes du jeu
+* Décomposition et répartition des différentes étapes de jeu dans la classe Main, incluant à son tour quelques méthodes.
+* Le tableau : 
+   * Création d’un tableau en deux dimensions avec 7 rangées et 8 colonnes (dont la première sera masquée, ceci afin de faire correspondre le choix de la colonne par le joueur avec l’indice réel de la colonne).
+   * Initialisation du tableau : on va le remplir de “1” afin de simuler visuellement des axes de colonnes. En bas, la rangée surnuméraire par rapport à la surface de jeu va servir à écrire les numéros des colonnes afin d’aider le joueur à faire son choix.
+   * Chaque joueur va mettre un jeton, symbolisé par un “0” ou par un “8”; le choix de ces caractères ayant été dicté par le fait qu’ils font la même taille, ceci afin de bien conserver l’alignement des colonnes dans la console.
+   * Afin de garder un ordre naturel pour le codeur, les lignes sont affichées en sens inverse, c’est-à-dire incrémentées du bas vers le haut.
+   * A chaque tour, le tableau va s’afficher de nouveau pour montrer la nouvelle implémentation
+   * Ensuite, l’analyse commence.
+* Les joueurs :
+   * On leur demande leur nom afin de personnaliser l’expérience de jeu
+   * On va incrémenter le nombre des tours, ceci permettra de déterminer à qui est le tour de jeu (au moyen d’un modulo)
+
+
+* Le tour de jeu : 
+   * Le joueur choisit dans quelle colonne il veut placer son jeton. 
+L’algorithme va chercher dans cette colonne la première place non-occupée par un jeton par un test et par incrémentation de l’indice vertical. Ce qui correspond à :        
+      * Le joueur choisit de mettre son jeton dans la colonne 5.
+      * L’algo regarde s’il y une place libre (symbolisée par 1)
+      * Si la place est libre, il y substitue son jeton
+      * Si la place est déjà prise, on va retester la rangée suivante.
+
+
+* L’algorithme de réussite :
+   * Le joueur vient de choisir sa colonne, le tableau vient d’être implémenté.
+   * L’algorithme se focalise sur le nouveau jeton et va scruter dans toutes les directions autour de ce jeton afin de chercher si ce jeton peut appartenir à un alignement de 4 jetons identiques. 
+   * En cas d’alignement, c’est une victoire et le jeu est terminé.
+   * En cas de non-alignement de 4 jetons identiques, c’est au joueur suivant de choisir de nouveau une colonne.
+
+
+
+
+L’analyse du jeu.
+* Pour qu’un Puissance4 puisse exister horizontalement, la colonne 4 est forcément incrémentée. La condition d’analyse horizontale du dernier coup joué va donc dépendre de la condition suivante : y a-t-il un jeton sur la 4ème colonne ? Le cas échéant, on va regarder de la gauche vers la droite si 4 blocs identiques sont alignés.
+* Pour qu’un Puissance4 puisse exister verticalement, les rangées 3 et 4 sont obligatoirement implémentées. Ce sera donc la condition de départ du scan vertical sur le même principe que le scann horizontal.
+* Pour les diagonales, c’est plus compliqué du fait des risques de sortie de tableau, le projet est encore en cours de développement. J’ai commandé sur baba.express un 3ème neurone pour essayer de résoudre ça
+* Un contrôle de chaque case du haut permet de déclencher la nullité. Mais en fait, ça aurait plus simple de le faire en comptant le nombre de tours… (fatigue…)
